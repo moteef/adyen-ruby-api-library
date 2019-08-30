@@ -78,7 +78,7 @@ end
 # create and return a client for testing
 # auth_type must be one of [:basic, :api_key]
 def create_client(auth_type)
-  client = Adyen::Client.new
+  client = AdyenOfficial::Client.new
   client.env = :mock
 
   if auth_type == :basic then

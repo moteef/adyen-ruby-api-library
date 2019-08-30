@@ -1,5 +1,5 @@
-module Adyen
-  class AdyenError < StandardError
+module AdyenOfficial
+  class AdyenOfficialError < StandardError
     attr_reader :code, :response, :request, :msg
 
     def initialize(request = nil, response = nil, msg = nil, code = nil)
@@ -18,44 +18,44 @@ module Adyen
     end
   end
 
-  class AuthenticationError < AdyenError
+  class AuthenticationError < AdyenOfficialError
     def initialize(msg, request)
       super(request, nil, msg, 401)
     end
   end
 
-  class PermissionError < AdyenError
+  class PermissionError < AdyenOfficialError
     def initialize(msg, request)
       super(request, nil, msg, 403)
     end
   end
 
-  class FormatError < AdyenError
+  class FormatError < AdyenOfficialError
     def initialize(msg, request, response)
       super(request, response, msg, 422)
     end
   end
 
-  class ServerError < AdyenError
+  class ServerError < AdyenOfficialError
     def initialize(msg, request, response)
       super(request, response, msg, 500)
     end
   end
 
-  class ConfigurationError < AdyenError
+  class ConfigurationError < AdyenOfficialError
     def initialize(msg, request)
       super(request, nil, msg, 905)
     end
   end
 
-  class ValidationError < AdyenError
+  class ValidationError < AdyenOfficialError
     def initialize(msg, request)
       super(request, nil, msg, nil)
     end
   end
 
   # catchall for errors which don't have more specific classes
-  class APIError < AdyenError
+  class APIError < AdyenOfficialError
     def initialize(msg, request, response, code)
       super(request, response, msg, code)
     end

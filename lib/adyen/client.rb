@@ -2,7 +2,7 @@ require "faraday"
 require "json"
 require_relative "./errors"
 
-module Adyen
+module AdyenOfficial
   class Client
     attr_accessor :ws_user, :ws_password, :api_key, :client, :adapter, :live_url_prefix
     attr_reader :env
@@ -77,9 +77,9 @@ module Adyen
       # will use api_key if present, otherwise ws_user and ws_password
       if @api_key.nil?
         if service == "PaymentSetupAndVerification"
-          raise Adyen::AuthenticationError.new("Checkout service requires API-key", request_data), "Checkout service requires API-key"
+          raise AdyenOfficial::AuthenticationError.new("Checkout service requires API-key", request_data), "Checkout service requires API-key"
         elsif @ws_password.nil? || @ws_user.nil?
-          raise Adyen::AuthenticationError.new("No authentication found - please set api_key or ws_user and ws_password", request_data), "No authentication found - please set api_key or ws_user and ws_password"
+          raise AdyenOfficial::AuthenticationError.new("No authentication found - please set api_key or ws_user and ws_password", request_data), "No authentication found - please set api_key or ws_user and ws_password"
         else
           auth_type = "basic"
         end
@@ -91,7 +91,7 @@ module Adyen
       conn = Faraday.new(url: url) do |faraday|
         faraday.adapter @adapter
         faraday.headers["Content-Type"] = "application/json"
-        faraday.headers["User-Agent"] = Adyen::NAME + "/" + Adyen::VERSION
+        faraday.headers["User-Agent"] = AdyenOfficial::NAME + "/" + AdyenOfficial::VERSION
 
         # set auth type based on service
         case auth_type
@@ -116,7 +116,7 @@ module Adyen
       # convert to json
       request_data = request_data.to_json
 
-      # post request to Adyen
+      # post request to AdyenOfficial
       begin
         response = conn.post do |req|
           req.body = request_data
@@ -128,9 +128,9 @@ module Adyen
       # check for API errors
       case response.status
       when 401
-        raise Adyen::AuthenticationError.new("Invalid API authentication; https://docs.adyen.com/user-management/how-to-get-the-api-key", request_data)
+        raise AdyenOfficial::AuthenticationError.new("Invalid API authentication; https://docs.adyen.com/user-management/how-to-get-the-api-key", request_data)
       when 403
-        raise Adyen::PermissionError.new("Missing user permissions; https://docs.adyen.com/user-management/user-roles", request_data)
+        raise AdyenOfficial::PermissionError.new("Missing user permissions; https://docs.adyen.com/user-management/user-roles", request_data)
       end
 
       response
@@ -140,8 +140,8 @@ module Adyen
     def add_application_info(request_data)
       external_platform = {
         :adyenLibrary => {
-          :name => Adyen::NAME,
-          :version => Adyen::VERSION.to_s
+          :name => AdyenOfficial::NAME,
+          :version => AdyenOfficial::VERSION.to_s
         }
       }
 
@@ -150,27 +150,27 @@ module Adyen
 
     # services
     def checkout
-      @checkout ||= Adyen::Checkout.new(self)
+      @checkout ||= AdyenOfficial::Checkout.new(self)
     end
 
     def checkout_utility
-      @checkout_utility ||= Adyen::CheckoutUtility.new(self)
+      @checkout_utility ||= AdyenOfficial::CheckoutUtility.new(self)
     end
 
     def payments
-      @payments ||= Adyen::Payments.new(self)
+      @payments ||= AdyenOfficial::Payments.new(self)
     end
 
     def payouts
-      @payouts ||= Adyen::Payouts.new(self)
+      @payouts ||= AdyenOfficial::Payouts.new(self)
     end
 
     def recurring
-      @recurring ||= Adyen::Recurring.new(self)
+      @recurring ||= AdyenOfficial::Recurring.new(self)
     end
 
     def marketpay
-      @marketpay ||= Adyen::Marketpay::Marketpay.new(self)
+      @marketpay ||= AdyenOfficial::Marketpay::Marketpay.new(self)
     end
   end
 end

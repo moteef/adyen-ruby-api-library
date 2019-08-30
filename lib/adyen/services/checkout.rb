@@ -1,6 +1,6 @@
 require_relative 'service'
 
-module Adyen
+module AdyenOfficial
   class Checkout < Service
     DEFAULT_VERSION = 49
 
@@ -22,7 +22,7 @@ module Adyen
     def payments(*args)
       case args.size
       when 0
-        Adyen::CheckoutDetail.new(@client, @version)
+        AdyenOfficial::CheckoutDetail.new(@client, @version)
       when 1
         action = 'payments'
         @client.call_adyen_api(@service, action, args[0], @version)

@@ -1,6 +1,6 @@
 require_relative 'service'
 
-module Adyen
+module AdyenOfficial
   class CheckoutUtility < Service
     DEFAULT_VERSION = 1
 
