@@ -2,16 +2,16 @@
 
 require 'spec_helper'
 
-RSpec.describe Adyen::AdyenError do
+RSpec.describe AdyenOfficial::AdyenOfficialError do
   describe '#to_s' do
     it 'describes using the error properties' do
-      expect(Adyen::AdyenError.new('request', 'response', 'message', 'code').to_s).to eq('Adyen::AdyenError code:code, request:request, response:response, msg:message')
+      expect(AdyenOfficial::AdyenOfficialError.new('request', 'response', 'message', 'code').to_s).to eq('AdyenOfficial::AdyenOfficialError code:code, request:request, response:response, msg:message')
     end
     it 'skips the null properties' do
-      expect(Adyen::AdyenError.new('request', nil, nil, 'code').to_s).to eq('Adyen::AdyenError code:code, request:request')
+      expect(AdyenOfficial::AdyenOfficialError.new('request', nil, nil, 'code').to_s).to eq('AdyenOfficial::AdyenOfficialError code:code, request:request')
     end
     it 'uses the proper error class name' do
-      expect(Adyen::PermissionError.new('a message', 'a request').to_s).to eq('Adyen::PermissionError code:403, request:a request, msg:a message')
+      expect(AdyenOfficial::PermissionError.new('a message', 'a request').to_s).to eq('AdyenOfficial::PermissionError code:403, request:a request, msg:a message')
     end
   end
 end

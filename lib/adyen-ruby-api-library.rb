@@ -10,7 +10,7 @@ require_relative "adyen/services/marketpay"
 require_relative "adyen/services/service"
 
 # add snake case to camel case converter to String
-# to convert rubinic method names to Adyen API methods
+# to convert rubinic method names to AdyenOfficial API methods
 #
 # i.e. snake_case -> snakeCase
 # note that the first letter is not capitalized as normal

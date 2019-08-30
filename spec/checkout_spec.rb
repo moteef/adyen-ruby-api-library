@@ -3,7 +3,7 @@ require "json"
 
 # rubocop:disable Metrics/BlockLength
 
-RSpec.describe Adyen::Checkout, service: "checkout" do
+RSpec.describe AdyenOfficial::Checkout, service: "checkout" do
   before(:all) do
     @shared_values = {
       client: create_client(:api_key),

@@ -1,6 +1,6 @@
 require_relative 'service'
 
-module Adyen
+module AdyenOfficial
   class Payments < Service
     attr_accessor :version
     DEFAULT_VERSION = 49

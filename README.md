@@ -1,6 +1,6 @@
-# Adyen API Library for Ruby
+# AdyenOfficial API Library for Ruby
 
-The Adyen API Library for Ruby lets you easily work with Adyen's API.
+The AdyenOfficial API Library for Ruby lets you easily work with AdyenOfficial's API.
 
 ## Integration
 
@@ -30,17 +30,17 @@ Follow the rest of our guides from the [documentation](https://adyen.github.io/a
 
 ## Usage
 
-### Create a client to connect to the Adyen API
+### Create a client to connect to the AdyenOfficial API
 ```ruby
 require 'adyen-ruby-api-library'
 
-adyen = Adyen::Client.new
+adyen = AdyenOfficial::Client.new
 
 # for API-key based implementations
 adyen.api_key = 'AF5XXXXXXXXXXXXXXXXXXXX'
 
 # for basic-auth based implementations
-adyen.ws_user = 'ws@Company.Adyen'
+adyen.ws_user = 'ws@Company.AdyenOfficial'
 adyen.ws_password = 'super_secure_password123'
 ```
 
@@ -139,7 +139,7 @@ adyen.checkout.version = 49
 ## Support
 
 If you have any problems, questions or suggestions, create an issue here or send your inquiry to support@adyen.com.
-  
+
 ## Licence
 
 MIT license. For more information, see the LICENSE file.
